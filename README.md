@@ -1,2 +1,2 @@
-# emotion-recognition
+# Emotion Recognition
 Software for detecting identity of faces and classifying their emotion.
