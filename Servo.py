@@ -2,11 +2,21 @@ from multiprocessing import Process, Queue
 import time
 
 class Servo:
-
+    """
+    Servo Number    GPIO number
+    0               4
+    1               17
+    2               18
+    3               21/27 (depends on board revision)
+    4               22
+    5               23
+    6               24
+    7               25
+    """
     def __init__(self, servoNum, upperlimit, lowerlimit):
         # ServoBlaster is whate we use to control the servo motor
         self.servoBlaster = open('/dev/servoblaster', 'w')
-        self.SERVO = servoNum   # servo number: 0,1,2,3...32  (defined in ServoBlaster for GPIO matching)
+        self.SERVO = servoNum   # servo number: 0,1,2,3...7  (defined in ServoBlaster for GPIO matching)
         self.ul=upperlimit
         self.ll=lowerlimit
 
