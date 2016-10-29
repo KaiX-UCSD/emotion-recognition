@@ -21,8 +21,8 @@ class Servo:
         self.ll=lowerlimit
 
         #Self Variables: initialize to arbitrary values
-        self.cp = 99    #current position of servo
-        self.dp = 100   #desired position of servo
+        self.cp = 150    #current position of servo
+        self.dp = 151   #desired position of servo
         
         #Queue for communicating with Process thread
         self.servoCp = Queue()

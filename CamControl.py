@@ -32,10 +32,10 @@ class CamControl:
 		self._ServoXll = 75
 		self._ServoYll = 75
 
-        """
-        Servos are default to Servo X-axis is assigned (servo-0) GPIO 4
-            Servo-Y axis is assigned (servo-1) GPIO 17
-        """
+		"""
+		Servos are default to Servo X-axis is assigned (servo-0) GPIO 4
+		    Servo-Y axis is assigned (servo-1) GPIO 17
+		"""
 		self.servo_X = Servo(0, self._ServoXul, self._ServoXll) 
 		self.servo_Y = Servo(1, self._ServoYul, self._ServoYll)
 
@@ -44,24 +44,24 @@ class CamControl:
 		print("Centering camera...")
 
 	def camLeft(self, distance, speed):
-		print "left"
+                print "left"
 		self.servo_X.moveClockwise(distance, speed)
 		return;
 
 	def camRight(self, distance, speed):
-		print "right"
+                print "right"
 		self.servo_X.moveCounterClockwise(distance, speed)
 		return;
 
 
 	def camDown(self, distance, speed):
-		print "down"
+                print "down"
 		self.servo_Y.moveCounterClockwise(distance, speed)
 		return;
 
 
 	def camUp(self, distance, speed):
-		print "up"
+                print "up"
 		self.servo_Y.moveClockwise(distance, speed)
 		return;
 		
