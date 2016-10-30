@@ -1,0 +1,20 @@
+Servo 0 (horizontal plane)
+------------------
+Min:    63 (left)
+Max     204 (right)
+Range:  [63, 204]
+
+Midpoint: 134
+
+Servo 1 (vertical plane)
+------------------------
+NOTE: ranges are actually greater than this but the
+rig blocks the camera from moving further. These ranges
+are specific to the current set up. It seems that this
+servo probably has the same values as servo 0, however.
+
+Min:    90 (down)
+Max:    185 (straight up)
+Range:  [90, 185]
+
+Midpoint: 138
