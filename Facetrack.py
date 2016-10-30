@@ -1,6 +1,7 @@
 import numpy as np
 import cv2 as cv
 import time
+
 FRAME_WIDTH = 320
 FRAME_HEIGHT = 240
 cap = cv.VideoCapture(0)
@@ -11,6 +12,7 @@ cascPath = 'haarcascade_frontalface_default.xml'
 
 # Create haar cascade
 faceCascade = cv.CascadeClassifier(cascPath)
+
 
 def get_faces(frame):
     # Convert to gray scale
@@ -27,9 +29,9 @@ def get_faces(frame):
 
 
 def mark_face(frame):
-    faces = get_faces(frame) 
+    faces = get_faces(frame)
 
-    #Ghetto tricK: store the w,h,x,y values of last face
+    # Ghetto tricK: store the w,h,x,y values of last face
     xFace = 0
     yFace = 0
     wFace = 0
@@ -43,71 +45,71 @@ def mark_face(frame):
         wFace = w
         hFace = h
 
-    #return center of face
-    return [(wFace/2 + xFace),(hFace/2 + yFace)]
+    # return center of face
+    return [(wFace / 2 + xFace), (hFace / 2 + yFace)]
 
 
 from CamControl import CamControl
+
 camera = CamControl()
-camera.camUp(50,9)
+camera.up(50, 9)
 time.sleep(1)
 while True:
-    
+
     # Capture frame-by-frame
     ret, frame = cap.read()
     ret, frame = cap.read()
     ret, frame = cap.read()
     ret, frame = cap.read()
     ret, frame = cap.read()
-    cv.flip(frame,1,frame)  #flip the image
+    cv.flip(frame, 1, frame)  # flip the image
 
     # Processing
-    #faces = get_faces(frame)
-    #faces = 0
+    # faces = get_faces(frame)
+    # faces = 0
     # Display the resulting frame
     cFace = mark_face(frame)
     cv.imshow("View", frame)
 
     if cFace[0] != 0:
-        
-        if cFace[0] > FRAME_WIDTH/2 + 40:
-            camera.camLeft(9,3)
-        elif cFace[0] > FRAME_WIDTH/2 + 30:
-            camera.camLeft(7,2)
-        elif cFace[0] > FRAME_WIDTH/2 + 20:
-            camera.camLeft(5,1)
-            
-        elif cFace[0] < FRAME_WIDTH/2 - 40:
-            #move left
-            camera.camRight(9,3)
-        elif cFace[0] < FRAME_WIDTH/2 - 30:
-            #move left
-            camera.camRight(7,2)
-        elif cFace[0] < FRAME_WIDTH/2 - 20:
-            #move left
-            camera.camRight(5,1)
 
-        if cFace[1] > FRAME_HEIGHT/2 + 40:
-            #move down
-            camera.camDown(9,3)
-        elif cFace[1] > FRAME_HEIGHT/2 + 30:
-            #move down
-            camera.camDown(7,2)
-        elif cFace[1] > FRAME_HEIGHT/2 + 20:
-            #move down
-            camera.camDown(5,1)
+        if cFace[0] > FRAME_WIDTH / 2 + 40:
+            camera.left(9, 3)
+        elif cFace[0] > FRAME_WIDTH / 2 + 30:
+            camera.left(7, 2)
+        elif cFace[0] > FRAME_WIDTH / 2 + 20:
+            camera.left(5, 1)
 
-        elif cFace[1] < FRAME_HEIGHT/2 - 40:
-            #move up
-            camera.camUp(9,3)
-        elif cFace[1] < FRAME_HEIGHT/2 - 30:
-            #move up
-            camera.camUp(7,2)
-        elif cFace[1] < FRAME_HEIGHT/2 - 20:
-            #move up
-            camera.camUp(5,1)
+        elif cFace[0] < FRAME_WIDTH / 2 - 40:
+            # move left
+            camera.right(9, 3)
+        elif cFace[0] < FRAME_WIDTH / 2 - 30:
+            # move left
+            camera.right(7, 2)
+        elif cFace[0] < FRAME_WIDTH / 2 - 20:
+            # move left
+            camera.right(5, 1)
 
-        
+        if cFace[1] > FRAME_HEIGHT / 2 + 40:
+            # move down
+            camera.down(9, 3)
+        elif cFace[1] > FRAME_HEIGHT / 2 + 30:
+            # move down
+            camera.down(7, 2)
+        elif cFace[1] > FRAME_HEIGHT / 2 + 20:
+            # move down
+            camera.down(5, 1)
+
+        elif cFace[1] < FRAME_HEIGHT / 2 - 40:
+            # move up
+            camera.up(9, 3)
+        elif cFace[1] < FRAME_HEIGHT / 2 - 30:
+            # move up
+            camera.up(7, 2)
+        elif cFace[1] < FRAME_HEIGHT / 2 - 20:
+            # move up
+            camera.up(5, 1)
+
     if cv.waitKey(1) & 0xFF == ord('q'):
         break
 
