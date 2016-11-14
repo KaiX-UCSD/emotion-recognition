@@ -44,6 +44,7 @@ Clone this repository into your folder: https://github.com/richardghirst/PiBits/
 To use this daemon grab the servod.c source and Makefile and:
 
 $ make servod
+
 To have the servod start automatically when the system boots, then you can
 install it along with a startup script as follows:
 
@@ -60,9 +61,10 @@ the easiest way is to run:
 $ sudo killall servod
 
 Note that the use of PWM will interfere with the 3.5mm jack audio output.
--------------------------
+
 
 Getting started on Windows:
+---------------------------
 1) Install Python 2.7
 	-Save on C:\Python\
 
