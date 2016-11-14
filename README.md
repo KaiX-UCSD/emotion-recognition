@@ -73,6 +73,7 @@ Getting started on Windows:
 		www.lfd.uci.edu/~gohlke/pythonlibs/#numpy
 	ii)  Save the file on C:\Python\Scripts
 	iii) Run cmd fron the above loction and type:
+
 	 $ pip install numpy-1.11.2+mkl-cp27-cp27m-win32.whl
 
 NOTE: You can try installing a newer numpy if the 1.11.2 is too old.
