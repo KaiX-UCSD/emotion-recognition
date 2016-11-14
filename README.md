@@ -43,22 +43,22 @@ ServoBlaster - The user space daemon
 Clone this repository into your folder: https://github.com/richardghirst/PiBits/tree/master/ServoBlaster/user
 To use this daemon grab the servod.c source and Makefile and:
 
-$ make servod
+	 $ make servod
 
 To have the servod start automatically when the system boots, then you can
 install it along with a startup script as follows:
 
-$ sudo make install 
+	 $ sudo make install 
 
 If you don't want is to start automatically, then run this command on:
 
-$ sudo ./servod
+	 $ sudo ./servod
 
 The prompt will return immediately, and servod is left running in the background.  
 You can check it is running via the "ps ax" command. If you want to stop servod,
 the easiest way is to run:
 
-$ sudo killall servod
+	 $ sudo killall servod
 
 Note that the use of PWM will interfere with the 3.5mm jack audio output.
 
@@ -73,7 +73,7 @@ Getting started on Windows:
 		www.lfd.uci.edu/~gohlke/pythonlibs/#numpy
 	ii)  Save the file on C:\Python\Scripts
 	iii) Run cmd fron the above loction and type:
- $ pip install numpy-1.11.2+mkl-cp27-cp27m-win32.whl
+	 $ pip install numpy-1.11.2+mkl-cp27-cp27m-win32.whl
 
 NOTE: You can try installing a newer numpy if the 1.11.2 is too old.
 
