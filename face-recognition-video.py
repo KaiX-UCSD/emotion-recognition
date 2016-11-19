@@ -25,7 +25,6 @@ def get_faces(frame):
 def mark_face(frame):
 
     faces = get_faces(frame)
-
     # Draw rectangle around faces
     for (x, y, w, h) in faces:
         cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
