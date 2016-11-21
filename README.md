@@ -1,5 +1,6 @@
 # Emotion Recognition
 Software for detecting identity of faces and classifying their emotion.
+We are using Opencv3.0 for our project.
 
 To run on your Mac/Linux:
 	To run the facial tracking on your PC's webcam run the command:
@@ -31,10 +32,8 @@ If numpy is not already installed, then
 
 To install opencv2
 	
-	$ sudo apt-get install python-opencv
-	$ sudo apt-get install python-scipy
-	$ sudo apt-get install ipython
-	
+	$ TODO
+
 Install ServoBlaster onto pi as said in the readme of 
 	https://github.com/richardghirst/PiBits/tree/master/ServoBlaster
 	(the user space daemon). Here is a barebones excerpt of the instructions
