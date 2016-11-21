@@ -9,8 +9,8 @@ onComputer = True
 FRAME_WIDTH = 320
 FRAME_HEIGHT = 240
 cap = cv.VideoCapture(0)
-cap.set(cv.cv.CV_CAP_PROP_FRAME_WIDTH, FRAME_WIDTH)
-cap.set(cv.cv.CV_CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT)
+cap.set(cv.CAP_PROP_FRAME_WIDTH, FRAME_WIDTH)
+cap.set(cv.CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT)
 
 cascPath = 'haarcascade_frontalface_default.xml'
 
