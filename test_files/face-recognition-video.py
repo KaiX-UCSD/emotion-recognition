@@ -2,7 +2,7 @@ import numpy as np
 import cv2 as cv
 
 cap = cv.VideoCapture(0)
-cascPath = 'haarcascade_frontalface_default.xml'
+cascPath = '../cascades/haarcascade_frontalface_default.xml'
 
 # Create haar cascade
 faceCascade = cv.CascadeClassifier(cascPath)
