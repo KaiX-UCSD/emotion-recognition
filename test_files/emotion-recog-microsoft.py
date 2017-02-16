@@ -6,6 +6,10 @@ import json
 import time
 import cv2 as cv
 
+from collections import Counter
+
+POSSIBLE_EMOTIONS = ['anger', 'contempt', 'disgust', 'fear', 'happiness', 'neutral', 'sadness',
+                     'surprise']
 MAX_RETRIES = 10
 
 # Endpoint and credentials
@@ -14,10 +18,10 @@ with open('key.txt', 'r') as keyFile:
 API_URL = 'https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize'
 
 
-def processRequest(json, data, headers, params):
+def process_request(json_data, data, headers, params):
     """
     Contact API and process returned content
-    :param json: used for extra info (such a URL image processing)
+    :param json_data: used for extra info (such a URL image processing)
     :param data: locally available data to be analyzed
     :param headers: request headers
     :param params: request parameters
@@ -29,7 +33,7 @@ def processRequest(json, data, headers, params):
     # TODO rotate keys if we are out of API calls
 
     while True:
-        response = requests.request('post', API_URL, json=json, data=data, headers=headers,
+        response = requests.request('post', API_URL, json=json_data, data=data, headers=headers,
                                     params=params)
 
         # Handle error response
@@ -65,7 +69,7 @@ def processRequest(json, data, headers, params):
     return result
 
 
-def analyzeImage(img):
+def analyze_image(img):
     """
     Analyze an image with the Microsoft Emotion Recognition API
     :param img: a numpy array representing the image
@@ -79,17 +83,31 @@ def analyzeImage(img):
     headers['Content-Type'] = 'application/octet-stream'
 
     # Contact API
-    return processRequest(None, data, headers, None)
+    return process_request(None, data, headers, None)
+
+
+def get_top_emotion(json):
+    """
+    Get emotion with the highest likelihood from the first face detected by the API
+    :param json: json response from API
+    :return: string representation of most probably emotion
+    """
+    if len(result) <= 0 or 'scores' not in result[0]:
+        return None
+
+    # Get top probability
+    counter = Counter(result[0]['scores'])
+    return counter.most_common(1)[0][0]
 
 
 cam = cv.VideoCapture(0)
 retVal, im = cam.read()
 print(retVal)
 
-result = analyzeImage(im)
+result = analyze_image(im)
 
 print(json.dumps(result, sort_keys=True, indent=4, separators={',', ': '}))
 
-print(result[0]["scores"])
+print(get_top_emotion(result))
 
 cam.release()
