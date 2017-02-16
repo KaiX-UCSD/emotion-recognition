@@ -176,4 +176,4 @@ ENV/
 .idea/
 *.swp
 /test_files/key.txt
-/cohn-kanade.tgz
+/cohn-kanade

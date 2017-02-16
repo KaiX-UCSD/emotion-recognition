@@ -16,10 +16,17 @@ API_URL = 'https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize'
 
 def processRequest(json, data, headers, params):
     """
-    Process request from API and return appropriate format
+    Contact API and process returned content
+    :param json: used for extra info (such a URL image processing)
+    :param data: locally available data to be analyzed
+    :param headers: request headers
+    :param params: request parameters
+    :return: JSON or image depending on request, or None if no data could be extracted
     """
     retries = 0
     result = None
+
+    # TODO rotate keys if we are out of API calls
 
     while True:
         response = requests.request('post', API_URL, json=json, data=data, headers=headers,
@@ -58,22 +65,31 @@ def processRequest(json, data, headers, params):
     return result
 
 
-# TODO get rid of hard coded link
-# with open('face1.jpg', 'rb') as f:
-#     data = f.read()
+def analyzeImage(img):
+    """
+    Analyze an image with the Microsoft Emotion Recognition API
+    :param img: a numpy array representing the image
+    :return: a JSON object as specified by the API, or None if something went wrong
+    """
+    data = cv.imencode('.png', im)[1].tostring()  # convert image to string data
+
+    # Create header
+    headers = dict()
+    headers['Ocp-Apim-Subscription-Key'] = API_KEY
+    headers['Content-Type'] = 'application/octet-stream'
+
+    # Contact API
+    return processRequest(None, data, headers, None)
+
 
 cam = cv.VideoCapture(0)
 retVal, im = cam.read()
-
 print(retVal)
 
-cv.imshow('face', im)
-data = cv.imencode('.png', im)[1].tostring()
-
-headers = dict()
-headers['Ocp-Apim-Subscription-Key'] = API_KEY
-headers['Content-Type'] = 'application/octet-stream'
-
-result = processRequest(None, data, headers, None)
+result = analyzeImage(im)
 
 print(json.dumps(result, sort_keys=True, indent=4, separators={',', ': '}))
+
+print(result[0]["scores"])
+
+cam.release()
