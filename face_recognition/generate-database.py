@@ -64,6 +64,8 @@ def get_images_and_labels(path, name):
 
 
 
+<<<<<<< HEAD
+=======
 # counter for saving images
 imgNum = 0   
 # create a new folder to store images
@@ -71,6 +73,7 @@ name = raw_input('What is your name? ')
 print 'Press any key to take picture'
 # ID for associated person currently
 numID = '03'
+>>>>>>> 58e1eb13a9fa5a0f753800d2490fceedb4ef00d9
 # create database if not already created
 try:
     os.mkdir('Main_Database')
@@ -78,7 +81,18 @@ except EnvironmentError:
     print 'Main_Database directory already created.'
 # Path to the image database
 path = './Main_Database'
+<<<<<<< HEAD
+# counter for saving images
+imgNum = 0   
+# create a new folder to store images
+name = raw_input('What is your name? ')
+# ID for associated person currently
+numID = raw_input('Pick a two digit integer. This will be your ID: ')
 
+print 'Press any key to take picture'
+=======
+
+>>>>>>> 58e1eb13a9fa5a0f753800d2490fceedb4ef00d9
 while True:
     # Capture frame-by-frame
     ret, frame = cam.read()
