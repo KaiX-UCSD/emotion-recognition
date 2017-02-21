@@ -13,8 +13,9 @@ POSSIBLE_EMOTIONS = ['anger', 'contempt', 'disgust', 'fear', 'happiness', 'neutr
 MAX_RETRIES = 10
 
 # Endpoint and credentials
-with open('key.txt', 'r') as keyFile:
-    API_KEY = keyFile.readline()
+# with open('key.txt', 'r') as keyFile:
+#     API_KEY = keyFile.readline()
+API_KEY = 'aabb08051cef46f4a8ca20f3b5b8c0e8' #erics key
 API_URL = 'https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize'
 
 
