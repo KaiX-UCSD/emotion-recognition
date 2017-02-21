@@ -13,6 +13,7 @@ cap.set(cv.cv.CV_CAP_PROP_FRAME_WIDTH, FRAME_WIDTH)
 cap.set(cv.cv.CV_CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT)
 
 cascPath = 'haarcascade_frontalface_default.xml'
+cascPath = '../cascades/haarcascade_frontalface_default.xml'
 
 # Create haar cascade
 faceCascade = cv.CascadeClassifier(cascPath)

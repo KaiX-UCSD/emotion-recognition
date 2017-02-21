@@ -1,7 +1,12 @@
 import numpy as np
 import cv2 as cv
 
+FRAME_WIDTH = 320
+FRAME_HEIGHT = 240
 cap = cv.VideoCapture(0)
+cap.set(cv.cv.CV_CAP_PROP_FRAME_WIDTH, FRAME_WIDTH)
+cap.set(cv.cv.CV_CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT)
+
 cascPath = '../cascades/haarcascade_frontalface_default.xml'
 
 # Create haar cascade
@@ -16,7 +21,7 @@ def get_faces(frame):
     faces = faceCascade.detectMultiScale(
         gray,
         scaleFactor=1.1,
-        minNeighbors=5,
+        minNeighbors=1,
         minSize=(30, 30)
     )
     return faces
