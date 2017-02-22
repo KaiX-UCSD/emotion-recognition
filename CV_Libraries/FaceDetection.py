@@ -15,7 +15,7 @@ class FaceDetection:
             self.camera.up(50, 9)
         # Create haar cascade
         self.faceCascade = cv.CascadeClassifier(cascPath)
-
+        self.faces = []
     # Detect faces from image and return an array of faces
     # @return faces - an array of tuples (x,y,w,h)
     def get_faces(self,frame):
@@ -49,12 +49,12 @@ class FaceDetection:
         return [(wFace / 2 + xFace), (hFace / 2 + yFace)]
 
 
-    def face_detect(self, frame):
-        faces = self.get_faces(frame)
-        self.mark_face(frame,faces)
+    def detect_face(self, frame):
+        self.faces = self.get_faces(frame)
+        # self.mark_face(frame,self.faces)
         # when a face is detected. Return the frame.
-        if( len(faces) != 0):
-            self.move_camera(faces)
+        if( len(self.faces) != 0):
+            self.move_camera()
             return frame
         else:
             return None
@@ -62,9 +62,10 @@ class FaceDetection:
     move_camera() 
     @param cFace is coordinates to the center of the faces - [X, Y]
     """
-    def move_camera(self, faces):        
-        if len(faces) == 0:
+    def move_camera(self):        
+        if len(self.faces) == 0:
             return
+        faces = self.faces
         cFace = self.center_face(faces[0])
         if cFace[0] > self.FRAME_WIDTH / 2 + 40:
             if not self.onComputer:
