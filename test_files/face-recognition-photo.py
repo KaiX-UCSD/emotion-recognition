@@ -21,7 +21,8 @@ faces = faceCascade.detectMultiScale(
 
 # Draw rectangles around the face
 for (x, y, w, h) in faces:
-    cv.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
+	cv.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
+	cv.circle(image, (x+w/2, y+h/2), 1, (0, 0, 255), 2)
 
 cv.imshow('Faces found', image)
 cv.waitKey(0)

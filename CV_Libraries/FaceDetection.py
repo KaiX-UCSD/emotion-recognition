@@ -26,8 +26,8 @@ class FaceDetection:
         faces = self.faceCascade.detectMultiScale(
             gray,
             scaleFactor=1.1,
-            minNeighbors=1,
-            minSize=(30, 30)
+            minNeighbors=5,
+            minSize=(50, 50)
         )
         return faces
 
@@ -146,11 +146,11 @@ class FaceDetection:
     """
     def debugging_script(self, cascPath='../cascades/haarcascade_frontalface_default.xml'):
         #Set dimensions of frame as 320x240 for better performance on Pi
-        self.FRAME_WIDTH = 320
-        self.FRAME_HEIGHT = 240
+	# self.FRAME_WIDTH = 720
+	# self.FRAME_HEIGHT = 480
         cap = cv.VideoCapture(0)
-        cap.set(cv.cv.self.CV_CAP_PROP_FRAME_WIDTH, self.FRAME_WIDTH)
-        cap.set(cv.cv.self.CV_CAP_PROP_FRAME_HEIGHT, self.FRAME_HEIGHT)
+        cap.set(cv.cv.CV_CAP_PROP_FRAME_WIDTH, self.FRAME_WIDTH)
+        cap.set(cv.cv.CV_CAP_PROP_FRAME_HEIGHT, self.FRAME_HEIGHT)
 
         time.sleep(1)
         while True:
