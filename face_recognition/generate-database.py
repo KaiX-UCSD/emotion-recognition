@@ -5,6 +5,11 @@ from PIL import Image
 
 # Initialize webcam
 cam = cv.VideoCapture(0)
+FRAME_WIDTH = 320
+FRAME_HEIGHT = 240
+cam.set(cv.cv.CV_CAP_PROP_FRAME_WIDTH, FRAME_WIDTH)
+cam.set(cv.cv.CV_CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT)
+face_size = (200,200)
 
 # For face detection we will use the Haar Cascade provided by OpenCV
 cascPath = './haarcascade_frontalface_default.xml'
@@ -15,26 +20,25 @@ faceCascade = cv.CascadeClassifier(cascPath)
 def get_faces(frame):
     # Convert to gray scale
     gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
-
+    
+    # Resize for consistency
+    
+    
     # Detect faces
     faces = faceCascade.detectMultiScale(
         gray,
         scaleFactor=1.1,
-        minNeighbors=5,
-        minSize=(30, 30)
+        minNeighbors=5
     )
     #cv.imwrite('test.jpg', faces)
     return faces
 
-def mark_face(frame, num):
+def mark_face(frame):
 
     faces = get_faces(frame)
     # Draw rectangle around faces
     for (x, y, w, h) in faces:
         cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-        cropFrame = frame[y: y+h, x: x+w]
-	name = "frame%d.jpg"%num
-	cv.imwrite(name, cropFrame)
 
 def get_images_and_labels(path, name):
     # Append all the absolute image paths in a list image_paths
@@ -55,14 +59,14 @@ def get_images_and_labels(path, name):
         faces = faceCascade.detectMultiScale(image)
         # If face is detected, append the face to images and the label to labels
         for (x, y, w, h) in faces:
-            images.append(image[y: y + h, x: x + w]) 
+            face = image[y:y+h, x:x+w]
+            face = cv.resize(face, face_size)
+            images.append(face) 
             labels.append(nbr)
-            cv.imshow("Adding faces to traning set...", image[y: y + h, x: x + w]) 
-            cv.waitKey(1)
+            cv.imshow("Adding faces to traning set...", face) 
+            cv.waitKey(10)
     # return the images list and labels list
     return images, labels
-
-
 
 # create database if not already created
 try:
@@ -82,9 +86,10 @@ print 'Press any key to take picture'
 while True:
     # Capture frame-by-frame
     ret, frame = cam.read()
-
+    # Flip frame along y-axis 
+    frame = cv.flip(frame, 1)
     # Processing
-#    mark_face(frame, frameNum)
+#    mark_face(frame)
 
     # Display the resulting frame
     cv.imshow('frame', frame)
@@ -111,7 +116,7 @@ path = './Main_Database'
 images, labels = get_images_and_labels(path, name)
 
 # Perfrom training and save to xml file
-recognizer = cv.createLBPHFaceRecognizer()
+recognizer = cv.createEigenFaceRecognizer()
 recognizer.train(images, np.array(labels))
 recognizer.save('trained.xml')
 print 'xml file created!'
